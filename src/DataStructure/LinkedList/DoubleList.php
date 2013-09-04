@@ -15,6 +15,11 @@ class DoubleList extends SingleList
 	protected $root = NULL;
 
 	/**
+	 * @var DoubleNode
+	 */
+	protected $last = NULL;
+
+	/**
 	 * @return boolean
 	 */
 	public function isEmpty ()
@@ -34,6 +39,11 @@ class DoubleList extends SingleList
 		$node->setNext($this->root);
 		$this->root = $node;
 
+		if (is_null($this->root->getNext()))
+		{
+			$this->last = $node;
+		}
+
 		return $this;
 	}
 
@@ -46,18 +56,15 @@ class DoubleList extends SingleList
 	{
 		$node = new DoubleNode($item);
 
-		if ($this->isEmpty())
+		if (!$this->isEmpty())
 		{
-			$this->root = $node;
+			$this->last->setNext($node);
+			$this->last = $this->last->getNext();
 		}
 		else
 		{
-			$current = $this->root;
-			while (!is_null($current->getNext()))
-			{
-				$current = $current->getNext();
-			}
-			$current->setNext($node);
+			$this->root = $node;
+			$this->last = $node;
 		}
 		return $this;
 	}
@@ -91,14 +98,10 @@ class DoubleList extends SingleList
 			throw new \UnderflowException('List is empty!');
 		}
 
-		$current = $this->root;
-		while (!is_null($current->getNext()))
-		{
-			$current = $current->getNext();
-		}
-		$current_value = $current->getValue();
-		$current->getPreview()->removeNext();
-		return $current_value;
+		$last        = $this->last->getValue();
+		$this->last  = $this->last->getPreview();
+
+		return $last;
 	}
 
 	public function dump ()
