@@ -51,7 +51,7 @@ class BinaryNode
 	/**
 	 * @param BinaryNode $node
 	 */
-	public function setLeft (BinaryNode $node)
+	public function setLeft (BinaryNode &$node)
 	{
 		$this->left = $node;
 	}
@@ -59,7 +59,7 @@ class BinaryNode
 	/**
 	 * @return BinaryNode
 	 */
-	public function getLeft ()
+	public function &getLeft ()
 	{
 		return $this->left;
 	}
@@ -67,7 +67,7 @@ class BinaryNode
 	/**
 	 * @param BinaryNode $node
 	 */
-	public function setRight (BinaryNode $node)
+	public function setRight (BinaryNode &$node)
 	{
 		$this->right = $node;
 	}
@@ -75,7 +75,7 @@ class BinaryNode
 	/**
 	 * @return BinaryNode
 	 */
-	public function getRight ()
+	public function &getRight ()
 	{
 		return $this->right;
 	}

@@ -34,8 +34,10 @@ class BinaryTree
 	/**
 	 * @param BinaryNode $node
 	 * @param BinaryNode $subtree
+	 *
+	 * @return $this
 	 */
-	protected function insertNode (BinaryNode $node, BinaryNode &$subtree)
+	protected function insertNode (BinaryNode $node, &$subtree)
 	{
 		if (is_null($subtree))
 		{
@@ -45,34 +47,50 @@ class BinaryTree
 		{
 			$node_value    = $node->getValue();
 			$subtree_value = $subtree->getValue();
-			if ($node_value > $subtree_value)
+			if ($node_value < $subtree_value)
 			{
-				$this->insertNode($node, $subtree->getRight());
+				$left = &$subtree->getLeft();
+				$this->insertNode($node, $left);
 			}
-			else if ($node_value < $subtree_value)
+			elseif ($node_value > $subtree_value)
 			{
-				$this->insertNode($node, $subtree->getLeft());
+				$right = &$subtree->getRight();
+				$this->insertNode($node, $right);
 			}
 		}
+		return $this;
 	}
 
 	public function delete ($value)
 	{
+		if ($this->isEmpty())
+		{
+			throw new \UnderflowException('Tree is empty!');
+		}
+
 		$node = $this->findNode($value, $this->root);
 		$this->deleteNode($node);
 		return $this;
 	}
 
-	protected function findNode ($value, BinaryNode $subtree)
+	/**
+	 * @param mixed $value
+	 * @param BinaryNode $subtree
+	 *
+	 * @return BinaryNode
+	 */
+	protected function findNode ($value, &$subtree)
 	{
 		$subtree_value = $subtree->getValue();
 		if ($subtree_value > $value)
 		{
-			return $this->findNode($value, $subtree->getLeft());
+			$left = &$subtree->getLeft();
+			return $this->findNode($value, $left);
 		}
 		elseif ($subtree_value < $value)
 		{
-			return $this->findNode($value, $subtree->getRight());
+			$right = &$subtree->getRight();
+			return $this->findNode($value, $right);
 		}
 		else
 		{
@@ -108,4 +126,23 @@ class BinaryTree
 			}
 		}
 	}
+
+	public function dump ()
+	{
+		echo '<pre>'; print_r($this->root); echo '</pre>';
+	}
 }
+
+$tree = new BinaryTree();
+$tree->insert(10);
+$tree->insert(9);
+$tree->insert(11);
+$tree->insert(13);
+$tree->insert(12);
+$tree->insert(7);
+
+$tree->dump();
+
+$tree->delete(14);
+
+$tree->dump();
