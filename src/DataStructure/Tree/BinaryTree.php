@@ -45,17 +45,13 @@ class BinaryTree
 		}
 		else
 		{
-			$node_value    = $node->getValue();
-			$subtree_value = $subtree->getValue();
-			if ($node_value < $subtree_value)
+			if ($node->value < $subtree->value)
 			{
-				$left = &$subtree->getLeft();
-				$this->insertNode($node, $left);
+				$this->insertNode($node, $subtree->left);
 			}
-			elseif ($node_value > $subtree_value)
+			elseif ($node->value > $subtree->value)
 			{
-				$right = &$subtree->getRight();
-				$this->insertNode($node, $right);
+				$this->insertNode($node, $subtree->right);
 			}
 		}
 		return $this;
@@ -68,8 +64,11 @@ class BinaryTree
 			throw new \UnderflowException('Tree is empty!');
 		}
 
-		$node = $this->findNode($value, $this->root);
-		$this->deleteNode($node);
+		$node = &$this->findNode($value, $this->root);
+		if ($node)
+		{
+			$this->deleteNode($node);
+		}
 		return $this;
 	}
 
@@ -79,18 +78,20 @@ class BinaryTree
 	 *
 	 * @return BinaryNode
 	 */
-	protected function findNode ($value, &$subtree)
+	protected function &findNode ($value, &$subtree)
 	{
-		$subtree_value = $subtree->getValue();
-		if ($subtree_value > $value)
+		if (is_null($subtree))
 		{
-			$left = &$subtree->getLeft();
-			return $this->findNode($value, $left);
+			return FALSE;
 		}
-		elseif ($subtree_value < $value)
+
+		if ($subtree->value > $value)
 		{
-			$right = &$subtree->getRight();
-			return $this->findNode($value, $right);
+			return $this->findNode($value, $subtree->left);
+		}
+		elseif ($subtree->value < $value)
+		{
+			return $this->findNode($value, $subtree->right);
 		}
 		else
 		{
@@ -100,49 +101,34 @@ class BinaryTree
 
 	protected function deleteNode (BinaryNode &$node)
 	{
-		if (is_null($node->getLeft()) && is_null($node->getRight()))
+		if (is_null($node->left) && is_null($node->right))
 		{
 			$node = NULL;
 		}
-		elseif (is_null($node->getLeft()))
+		elseif (is_null($node->left))
 		{
-			$node = $node->getLeft();
+			$node = $node->right;
 		}
-		elseif (is_null($node->getRight()))
+		elseif (is_null($node->right))
 		{
-			$node = $node->getRight();
+			$node = $node->left;
+
 		}
 		else
 		{
-			$right_left_node = $node->getRight()->getLeft();
-			if (is_null($right_left_node))
+			if (is_null($node->right->left))
 			{
-				$node = $node->getRight();
+				$node = $node->right;
 			}
 			else
 			{
-				$node->setValue($right_left_node->getValue());
-				$this->deleteNode($right_left_node);
+				$this->deleteNode($node->right->left);
 			}
 		}
 	}
 
 	public function dump ()
 	{
-		echo '<pre>'; print_r($this->root); echo '</pre>';
+		var_dump($this->root);
 	}
 }
-
-$tree = new BinaryTree();
-$tree->insert(10);
-$tree->insert(9);
-$tree->insert(11);
-$tree->insert(13);
-$tree->insert(12);
-$tree->insert(7);
-
-$tree->dump();
-
-$tree->delete(14);
-
-$tree->dump();
