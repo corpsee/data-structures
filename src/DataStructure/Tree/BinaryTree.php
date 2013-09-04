@@ -122,6 +122,7 @@ class BinaryTree
 			}
 			else
 			{
+				$node->value = $node->right->left->value;
 				$this->deleteNode($node->right->left);
 			}
 		}
