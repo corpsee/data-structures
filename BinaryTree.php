@@ -3,8 +3,8 @@
 class BinaryNode
 {
 	public $value;
-	public $left_child;
-	public $right_child;
+	public $left;
+	public $right;
 
 	public function __construct ($item)
 	{
@@ -16,22 +16,17 @@ class BinaryNode
 
 class BinaryTree
 {
-	protected $root_node;
-
-	public function __construct ()
-	{
-		$this->root_node = NULL;
-	}
+	protected $root = NULL;
 
 	public function isEmpty ()
 	{
-		return is_null($this->root_node);
+		return is_null($this->root);
 	}
 
 	public function insert ($item)
 	{
 		$node = new BinaryNode($item);
-		$this->insertNode($node, $this->root_node);
+		$this->insertNode($node, $this->root);
 	}
 
 	public function delete ($item)
