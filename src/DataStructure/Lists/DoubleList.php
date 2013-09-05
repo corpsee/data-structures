@@ -1,13 +1,13 @@
 <?php
 
-namespace DataStructure\LinkedList;
+namespace DataStructure\Lists;
 
 /**
  * Class SingleList
  *
- * @package DataStructure\LinkedList
+ * @package DataStructure\List
  */
-class DoubleList extends SingleList
+class DoubleLinkedList extends SingleLinkedList
 {
 	/**
 	 * @var DoubleNode
@@ -36,10 +36,10 @@ class DoubleList extends SingleList
 	{
 		$node = new DoubleNode($item);
 
-		$node->setNext($this->root);
+		$node->next = $this->root;
 		$this->root = $node;
 
-		if (is_null($this->root->getNext()))
+		if (is_null($this->root->next))
 		{
 			$this->last = $node;
 		}
@@ -58,8 +58,8 @@ class DoubleList extends SingleList
 
 		if (!$this->isEmpty())
 		{
-			$this->last->setNext($node);
-			$this->last = $this->last->getNext();
+			$this->last->next = $node;
+			$this->last = $this->last->next;
 		}
 		else
 		{
@@ -80,8 +80,8 @@ class DoubleList extends SingleList
 		{
 			throw new \UnderflowException('List is empty!');
 		}
-		$first       = $this->root->getValue();
-		$this->root  = $this->root->getNext();
+		$first       = $this->root->value;
+		$this->root  = $this->root->next;
 
 		return $first;
 	}
@@ -98,10 +98,38 @@ class DoubleList extends SingleList
 			throw new \UnderflowException('List is empty!');
 		}
 
-		$last        = $this->last->getValue();
-		$this->last  = $this->last->getPreview();
+		$last        = $this->last->value;
+		$this->last  = $this->last->preview;
 
 		return $last;
+	}
+
+	/**
+	 * @return mixed
+	 *
+	 * @throws \UnderflowException
+	 */
+	public function showFirst ()
+	{
+		if ($this->isEmpty())
+		{
+			throw new \UnderflowException('List is empty!');
+		}
+		return $this->root->value;
+	}
+
+	/**
+	 * @return mixed
+	 *
+	 * @throws \UnderflowException
+	 */
+	public function showLast ()
+	{
+		if ($this->isEmpty())
+		{
+			throw new \UnderflowException('List is empty!');
+		}
+		return $this->last->value;
 	}
 
 	public function dump ()
@@ -110,8 +138,8 @@ class DoubleList extends SingleList
 		$current = $this->root;
 		while (!is_null($current))
 		{
-			$list[]  = $current->getValue();
-			$current = $current->getNext();
+			$list[]  = $current->value;
+			$current = $current->next;
 		}
 		echo '<pre>'; print_r($list); echo '</pre>';
 	}

@@ -1,13 +1,13 @@
 <?php
 
-namespace DataStructure\LinkedList;
+namespace DataStructure\Lists;
 
 /**
  * Class SingleList
  *
- * @package DataStructure\LinkedList
+ * @package DataStructure\List
  */
-class SingleList
+class SingleLinkedList
 {
 	/**
 	 * @var SingleNode
@@ -31,7 +31,7 @@ class SingleList
 	{
 		$node = new SingleNode($item);
 
-		$node->setNext($this->root);
+		$node->next = $this->root;
 		$this->root = $node;
 
 		return $this;
@@ -53,11 +53,11 @@ class SingleList
 		else
 		{
 			$current = $this->root;
-			while (!is_null($current->getNext()))
+			while (!is_null($current->next))
 			{
-				$current = $current->getNext();
+				$current = $current->next;
 			}
-			$current->setNext($node);
+			$current->next = $node;
 		}
 		return $this;
 	}
@@ -73,8 +73,8 @@ class SingleList
 		{
 			throw new \UnderflowException('List is empty!');
 		}
-		$first       = $this->root->getValue();
-		$this->root  = $this->root->getNext();
+		$first       = $this->root->value;
+		$this->root  = $this->root->next;
 
 		return $first;
 	}
@@ -93,14 +93,48 @@ class SingleList
 
 		$current = $this->root;
 		$preview = NULL;
-		while (!is_null($current->getNext()))
+		while (!is_null($current->next))
 		{
 			$preview = $current;
-			$current = $current->getNext();
+			$current = $current->next;
 		}
-		$current_value = $current->getValue();
-		$preview->removeNext();
+		$current_value = $current->value;
+		$preview->next = NULL;
 		return $current_value;
+	}
+
+	/**
+	 * @return mixed
+	 *
+	 * @throws \UnderflowException
+	 */
+	public function showFirst ()
+	{
+		if ($this->isEmpty())
+		{
+			throw new \UnderflowException('List is empty!');
+		}
+		return $this->root->value;
+	}
+
+	/**
+	 * @return mixed
+	 *
+	 * @throws \UnderflowException
+	 */
+	public function showLast ()
+	{
+		if ($this->isEmpty())
+		{
+			throw new \UnderflowException('List is empty!');
+		}
+
+		$current = $this->root;
+		while (!is_null($current->next))
+		{
+			$current = $current->next;
+		}
+		return $current->value;
 	}
 
 	public function dump ()
@@ -109,8 +143,8 @@ class SingleList
 		$current = $this->root;
 		while (!is_null($current))
 		{
-			$list[]  = $current->getValue();
-			$current = $current->getNext();
+			$list[]  = $current->value;
+			$current = $current->next;
 		}
 		echo '<pre>'; print_r($list); echo '</pre>';
 	}
