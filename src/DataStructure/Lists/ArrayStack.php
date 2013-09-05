@@ -1,9 +1,13 @@
 <?php
 
+namespace DataStructure\Lists;
+
 /**
- * Class Stack
+ * Class ArrayStack
+ *
+ * @package DataStructure\Lists
  */
-class Stack
+class ArrayStack
 {
 	/**
 	 * @var array
@@ -18,33 +22,32 @@ class Stack
 	/**
 	 * @param integer $limit
 	 */
-	public function __construct ($limit = 10)
+	public function __construct ($limit = NULL)
 	{
 		$this->stack = array();
 		$this->limit = $limit;
 	}
 
 	/**
-	 * @param mixed $item
+	 * @param mixed $value
 	 *
 	 * @return $this
-	 *
-	 * @throws RuntimeException
+	 * @throws \OverflowException
 	 */
-	public function push ($item)
+	public function push ($value)
 	{
-		if (sizeof($this->stack) < $this->limit)
+		if (!is_null($this->limit) && sizeof($this->stack) >= $this->limit)
 		{
-			array_push($this->stack, $item);
-			return $this;
+			throw new \OverflowException('Stack overflow!');
 		}
-		throw new OverflowException('Stack overflow!');
+		array_push($this->stack, $value);
+		return $this;
 	}
 
 	/**
 	 * @return mixed
 	 *
-	 * @throws RuntimeException
+	 * @throws \UnderflowException
 	 */
 	public function pop ()
 	{
@@ -52,7 +55,7 @@ class Stack
 		{
 			return array_pop($this->stack);
 		}
-		throw new UnderflowException('Stack is empty!');
+		throw new \UnderflowException('Stack is empty!');
 	}
 
 	/**
