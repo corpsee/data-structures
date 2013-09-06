@@ -118,6 +118,7 @@ class BinaryTree
 		{
 			if (is_null($node->right->left))
 			{
+				$node->right->left = $node->left;
 				$node = $node->right;
 			}
 			else
