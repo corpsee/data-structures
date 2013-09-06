@@ -3,8 +3,7 @@
 error_reporting(-1);
 ini_set('display_errors', 1);
 
-require_once('src/DataStructure/Tree/BinaryNode.php');
-require_once('src/DataStructure/Tree/BinaryTree.php');
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'Vendors/autoload.php';
 
 use DataStructure\Tree\BinaryTree;
 
