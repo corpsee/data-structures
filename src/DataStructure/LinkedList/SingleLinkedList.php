@@ -269,13 +269,9 @@ class SingleLinkedList implements LinkedListInterface
 	{
 		if (!is_null($this->current))
 		{
-			$preview = $this->root;
-			if (!is_null($preview->next))
+			$preview = $this->getNodePreview($this->current);
+			if (!is_null($preview))
 			{
-				while ($preview->next !== $this->current)
-				{
-					$preview = $preview->next;
-				}
 				$this->current = $preview;
 				$this->current_index--;
 			}
