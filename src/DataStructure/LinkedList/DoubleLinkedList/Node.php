@@ -1,13 +1,15 @@
 <?php
 
-namespace DataStructure\LinkedList;
+namespace DataStructure\LinkedList\DoubleLinkedList;
+
+use DataStructure\LinkedList\SingleLinkedList as SingleNode;
 
 /**
  * Class DoubleLinkedNode
  *
  * @package DataStructure\LinkedList
  */
-class DoubleLinkedNode extends SingleLinkedNode
+class Node extends SingleNode
 {
 	/**
 	 * @var DoubleLinkedNode

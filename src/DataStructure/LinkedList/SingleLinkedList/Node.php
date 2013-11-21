@@ -1,13 +1,13 @@
 <?php
 
-namespace DataStructure\LinkedList;
+namespace DataStructure\LinkedList\SingleLinkedList;
 
 /**
  * Class SingleLinkedNode
  *
  * @package DataStructure\LinkedList
  */
-class SingleLinkedNode
+class Node
 {
 	/**
 	 * @var mixed
@@ -15,7 +15,7 @@ class SingleLinkedNode
 	public $value;
 
 	/**
-	 * @var SingleLinkedNode
+	 * @var Node
 	 */
 	public $next = NULL;
 

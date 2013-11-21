@@ -2,12 +2,15 @@
 
 namespace DataStructure\LinkedList;
 
+use DataStructure\LinkedList\SingleLinkedList\Node;
+use DataStructure\LinkedList\SingleLinkedList\Iterator;
+
 /**
  * Class SingleList
  *
  * @package DataStructure\LinkedList
  */
-class SingleLinkedList
+class SingleLinkedList implements LinkedListInterface
 {
 	/**
 	 * First element
@@ -38,11 +41,27 @@ class SingleLinkedList
 	protected $size = 0;
 
 	/**
+	 * @return Iterator
+	 */
+	public function getIterator()
+	{
+		return new Iterator($this);
+	}
+
+	/**
 	 * @return boolean
 	 */
 	public function isEmpty ()
 	{
 		return is_null($this->root);
+	}
+
+	/**
+	 * @return integer
+	 */
+	public function getSize()
+	{
+		return $this->size;
 	}
 
 	/**
@@ -54,7 +73,7 @@ class SingleLinkedList
 	 */
 	public function insertFirst ($value)
 	{
-		$node = new SingleLinkedNode($value);
+		$node = new Node($value);
 
 		$node->next = $this->root;
 		$this->root = $node;
@@ -70,13 +89,13 @@ class SingleLinkedList
 	/**
 	 * Insert last element
 	 *
-	 * @param mixed $item
+	 * @param mixed $value
 	 *
 	 * @return $this
 	 */
-	public function insertLast ($item)
+	public function insertLast ($value)
 	{
-		$node = new SingleLinkedNode($item);
+		$node = new Node($value);
 
 		if ($this->isEmpty())
 		{
@@ -99,11 +118,14 @@ class SingleLinkedList
 		return $this;
 	}
 
+	public function insertAfter ($index) {}
+
+	public function insertBefore ($index) {}
+
 	/**
 	 * Extract first element
 	 *
 	 * @return mixed
-	 *
 	 * @throws \UnderflowException
 	 */
 	public function extractFirst ()
@@ -153,6 +175,7 @@ class SingleLinkedList
 		return $value;
 	}
 
+
 	/**
 	 * @return mixed
 	 *
@@ -188,19 +211,11 @@ class SingleLinkedList
 	}
 
 	/**
-	 * @return integer
-	 */
-	public function getSize ()
-	{
-		return $this->size;
-	}
-
-	/**
 	 * @return SingleNode
 	 */
 	public function getCurrent ()
 	{
-		return $this->current;
+		return $this->current->value;
 	}
 
 	/**
@@ -211,18 +226,15 @@ class SingleLinkedList
 		return $this->current_index;
 	}
 
-	/**
-	 * @return $this
-	 */
-	public function next ()
-	{
-		if (!is_null($this->current) && !is_null($this->current->next))
-		{
-			$this->current = $this->current->next;
-			$this->current_index++;
-		}
-		return $this;
-	}
+
+	public function hasItem ($index) {}
+
+	public function getItem ($index) {}
+
+	public function setItem ($index) {}
+
+	public function removeItem ($index) {}
+
 
 	/**
 	 * @return $this
@@ -241,6 +253,19 @@ class SingleLinkedList
 				$this->current = $preview;
 				$this->current_index--;
 			}
+		}
+		return $this;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function next ()
+	{
+		if (!is_null($this->current) && !is_null($this->current->next))
+		{
+			$this->current = $this->current->next;
+			$this->current_index++;
 		}
 		return $this;
 	}

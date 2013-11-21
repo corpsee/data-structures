@@ -2,6 +2,8 @@
 
 namespace DataStructure\LinkedList;
 
+use DataStructure\LinkedList\DoubleLinkedList\Node;
+
 /**
  * Class SingleList
  *
@@ -34,7 +36,7 @@ class DoubleLinkedList extends SingleLinkedList
 	 */
 	public function insertFirst ($value)
 	{
-		$node = new DoubleLinkedNode($value);
+		$node = new Node($value);
 
 		$node->next = $this->root;
 		$this->root = $node;
@@ -48,13 +50,13 @@ class DoubleLinkedList extends SingleLinkedList
 	}
 
 	/**
-	 * @param mixed $item
+	 * @param mixed $value
 	 *
-	 * @return $this
+*@return $this
 	 */
-	public function insertLast ($item)
+	public function insertLast ($value)
 	{
-		$node = new DoubleLinkedNode($item);
+		$node = new Node($value);
 
 		if (!$this->isEmpty())
 		{
