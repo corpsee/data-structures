@@ -1,11 +1,13 @@
 <?php
 
-namespace DataStructure\Lists;
+namespace DataStructure\QueueStack;
+
+use DataStructure\LinkedList\DoubleLinkedList;
 
 /**
  * Class ArrayStack
  *
- * @package DataStructure\Lists
+ * @package DataStructure\LinkedList
  */
 class ListStack
 {

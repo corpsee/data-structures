@@ -1,11 +1,11 @@
 <?php
 
-namespace DataStructure\Lists;
+namespace DataStructure\QueueStack;
 
 /**
  * Class ArrayQueue
  *
- * @package DataStructure\Lists
+ * @package DataStructure\LinkedList
  */
 class ArrayQueue
 {

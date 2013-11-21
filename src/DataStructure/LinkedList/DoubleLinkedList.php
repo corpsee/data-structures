@@ -1,21 +1,21 @@
 <?php
 
-namespace DataStructure\Lists;
+namespace DataStructure\LinkedList;
 
 /**
  * Class SingleList
  *
- * @package DataStructure\List
+ * @package DataStructure\LinkedList
  */
 class DoubleLinkedList extends SingleLinkedList
 {
 	/**
-	 * @var DoubleNode
+	 * @var DoubleLinkedNode
 	 */
 	protected $root = NULL;
 
 	/**
-	 * @var DoubleNode
+	 * @var DoubleLinkedNode
 	 */
 	protected $last = NULL;
 
@@ -28,13 +28,13 @@ class DoubleLinkedList extends SingleLinkedList
 	}
 
 	/**
-	 * @param mixed $item
+	 * @param mixed $value
 	 *
-	 * @return $this
+*@return $this
 	 */
-	public function insertFirst ($item)
+	public function insertFirst ($value)
 	{
-		$node = new DoubleNode($item);
+		$node = new DoubleLinkedNode($value);
 
 		$node->next = $this->root;
 		$this->root = $node;
@@ -54,7 +54,7 @@ class DoubleLinkedList extends SingleLinkedList
 	 */
 	public function insertLast ($item)
 	{
-		$node = new DoubleNode($item);
+		$node = new DoubleLinkedNode($item);
 
 		if (!$this->isEmpty())
 		{
@@ -78,7 +78,7 @@ class DoubleLinkedList extends SingleLinkedList
 	{
 		if ($this->isEmpty())
 		{
-			throw new \UnderflowException('List is empty!');
+			throw new \UnderflowException('LinkedList is empty!');
 		}
 		$first       = $this->root->value;
 		$this->root  = $this->root->next;
@@ -95,7 +95,7 @@ class DoubleLinkedList extends SingleLinkedList
 	{
 		if ($this->isEmpty())
 		{
-			throw new \UnderflowException('List is empty!');
+			throw new \UnderflowException('LinkedList is empty!');
 		}
 
 		$last        = $this->last->value;
@@ -113,7 +113,7 @@ class DoubleLinkedList extends SingleLinkedList
 	{
 		if ($this->isEmpty())
 		{
-			throw new \UnderflowException('List is empty!');
+			throw new \UnderflowException('LinkedList is empty!');
 		}
 		return $this->root->value;
 	}
@@ -127,7 +127,7 @@ class DoubleLinkedList extends SingleLinkedList
 	{
 		if ($this->isEmpty())
 		{
-			throw new \UnderflowException('List is empty!');
+			throw new \UnderflowException('LinkedList is empty!');
 		}
 		return $this->last->value;
 	}
