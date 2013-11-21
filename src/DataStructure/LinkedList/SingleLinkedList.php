@@ -103,12 +103,8 @@ class SingleLinkedList implements LinkedListInterface
 		}
 		else
 		{
-			$current = $this->root;
-			while (!is_null($current->next))
-			{
-				$current = $current->next;
-			}
-			$current->next = $node;
+			$last       = $this->getLastNode();
+			$last->next = $node;
 		}
 
 		$this->size++;
@@ -158,14 +154,9 @@ class SingleLinkedList implements LinkedListInterface
 			throw new \UnderflowException('List is empty!');
 		}
 
-		$current    = $this->root;
-		$preview = NULL;
-		while (!is_null($current->next))
-		{
-			$preview = $current;
-			$current = $current->next;
-		}
-		$value = $current->value;
+		$last          = $this->getLastNode();
+		$preview       = $this->getNodePreview($last);
+		$value         = $last->value;
 		$preview->next = NULL;
 
 		$this->size--;
@@ -202,12 +193,8 @@ class SingleLinkedList implements LinkedListInterface
 			throw new \UnderflowException('List is empty!');
 		}
 
-		$current = $this->root;
-		while (!is_null($current->next))
-		{
-			$current = $current->next;
-		}
-		return $current->value;
+		$last = $this->getLastNode();
+		return $last->value;
 	}
 
 	/**
@@ -227,13 +214,52 @@ class SingleLinkedList implements LinkedListInterface
 	}
 
 
-	public function hasItem ($index) {}
+	public function hasItem ($index)
+	{
+		if ($this->isEmpty())
+		{
+			return FALSE;
+		}
+		return $index < $this->getSize() && $index >= 0;
+	}
 
-	public function getItem ($index) {}
+	public function getItem ($index)
+	{
+		if (!$this->hasItem($index))
+		{
+			throw new \OutOfBoundsException('List don`t have index: ' . $index);
+		}
+		$this->search($index);
+		return $this->getCurrent();
+	}
 
-	public function setItem ($index) {}
+	public function setItem ($value, $index = NULL)
+	{
+		if (is_null($index))
+		{
+			$this->insertLast($value);
+		}
 
-	public function removeItem ($index) {}
+		if (!$this->hasItem($index))
+		{
+			throw new \OutOfBoundsException('List don`t have index: ' . $index);
+		}
+		$this->search($index);
+		$this->current->value = $value;
+		return $this;
+	}
+
+	public function removeItem ($index)
+	{
+		if (!$this->hasItem($index))
+		{
+			return;
+		}
+		$this->search($index);
+
+		$this->current = $this->current->next;
+		$this->size--;
+	}
 
 
 	/**
@@ -295,5 +321,68 @@ class SingleLinkedList implements LinkedListInterface
 		$this->current_index = 0;
 
 		return $this;
+	}
+
+	/**
+	 * @param integer $index
+	 */
+	protected function search ($index)
+	{
+		if ($this->getCurrentIndex() === $index)
+		{
+			return;
+		}
+
+		if (0 === $index)
+		{
+			$this->start();
+			return;
+		}
+
+		if (($this->getSize() - 1) === $index)
+		{
+			$this->end();
+			return;
+		}
+
+		$current = $this->current;
+		if ($index < $this->getCurrentIndex())
+		{
+			while ($index < $this->getCurrentIndex())
+			{
+				$current = $current->next;
+			}
+		}
+		else
+		{
+			while ($index > $this->getCurrentIndex())
+			{
+				$current = $this->getNodePreview($current);
+			}
+		}
+		$this->current       = $current;
+		$this->current_index = $index;
+	}
+
+	protected function getNodePreview ($item)
+	{
+		$current = $this->root;
+		$preview = NULL;
+		while (!is_null($current->next) && $current !== $item)
+		{
+			$preview = $current;
+			$current = $current->next;
+		}
+		return $preview;
+	}
+
+	protected function getLastNode ()
+	{
+		$current = $this->current;
+		while (!is_null($current->next))
+		{
+			$current = $current->next;
+		}
+		return $current;
 	}
 }

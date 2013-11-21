@@ -39,7 +39,7 @@ interface LinkedListInterface extends \IteratorAggregate
 
 	public function getItem ($index);
 
-	public function setItem ($index);
+	public function setItem ($value, $index);
 
 	public function removeItem ($index);
 
