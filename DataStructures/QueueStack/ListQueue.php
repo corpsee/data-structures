@@ -1,13 +1,13 @@
 <?php
 
-namespace DataStructure\QueueStack;
+namespace DataStructures\QueueStack;
 
-use DataStructure\LinkedList\DoubleLinkedList;
+use DataStructures\LinkedList\DoubleLinkedList;
 
 /**
  * Class ListQueue
  *
- * @package DataStructure\LinkedList
+ * @package DataStructures\LinkedList
  */
 class ListQueue
 {

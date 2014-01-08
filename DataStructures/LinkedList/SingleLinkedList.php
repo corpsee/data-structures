@@ -1,14 +1,14 @@
 <?php
 
-namespace DataStructure\LinkedList;
+namespace DataStructures\LinkedList;
 
-use DataStructure\LinkedList\SingleLinkedList\Node as SingleNode;
-use DataStructure\LinkedList\SingleLinkedList\Iterator;
+use DataStructures\LinkedList\SingleLinkedList\Node as SingleNode;
+use DataStructures\LinkedList\SingleLinkedList\Iterator;
 
 /**
  * Class SingleList
  *
- * @package DataStructure\LinkedList
+ * @package DataStructures\LinkedList
  */
 class SingleLinkedList implements LinkedListInterface
 {

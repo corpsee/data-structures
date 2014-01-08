@@ -1,11 +1,11 @@
 <?php
 
-namespace DataStructure\LinkedList\SingleLinkedList;
+namespace DataStructures\LinkedList\SingleLinkedList;
 
 /**
  * Class SingleLinkedNode
  *
- * @package DataStructure\LinkedList
+ * @package DataStructuress\LinkedList
  */
 class Node
 {

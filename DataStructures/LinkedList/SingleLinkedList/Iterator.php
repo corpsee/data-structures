@@ -1,8 +1,8 @@
 <?php
 
-namespace DataStructure\LinkedList\SingleLinkedList;
+namespace DataStructures\LinkedList\SingleLinkedList;
 
-use DataStructure\LinkedList\SingleLinkedList;
+use DataStructures\LinkedList\SingleLinkedList;
 
 class Iterator implements \Countable, \Iterator
 {

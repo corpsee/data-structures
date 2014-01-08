@@ -1,6 +1,6 @@
 <?php
 
-namespace DataStructure\LinkedList;
+namespace DataStructures\LinkedList;
 
 interface LinkedListInterface extends \IteratorAggregate
 {

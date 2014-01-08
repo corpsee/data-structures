@@ -1,11 +1,11 @@
 <?php
 
-namespace DataStructure\Tree;
+namespace DataStructures\Tree;
 
 /**
  * Class BinaryTree
  *
- * @package DataStructure\Tree
+ * @package DataStructures\Tree
  */
 class BinaryTree
 {
