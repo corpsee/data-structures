@@ -2,7 +2,7 @@
 
 namespace DataStructure\LinkedList;
 
-use DataStructure\LinkedList\SingleLinkedList\Node;
+use DataStructure\LinkedList\SingleLinkedList\Node as SingleNode;
 use DataStructure\LinkedList\SingleLinkedList\Iterator;
 
 /**
@@ -73,7 +73,7 @@ class SingleLinkedList implements LinkedListInterface
 	 */
 	public function insertFirst ($value)
 	{
-		$node = new Node($value);
+		$node = new SingleNode($value);
 
 		$node->next = $this->root;
 		$this->root = $node;
@@ -95,7 +95,7 @@ class SingleLinkedList implements LinkedListInterface
 	 */
 	public function insertLast ($value)
 	{
-		$node = new Node($value);
+		$node = new SingleNode($value);
 
 		if ($this->isEmpty())
 		{

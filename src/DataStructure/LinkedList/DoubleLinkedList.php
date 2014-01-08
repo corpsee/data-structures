@@ -2,22 +2,22 @@
 
 namespace DataStructure\LinkedList;
 
-use DataStructure\LinkedList\DoubleLinkedList\Node;
+use DataStructure\LinkedList\DoubleLinkedList\Node as DoubleNode;
 
 /**
  * Class SingleList
  *
  * @package DataStructure\LinkedList
  */
-class DoubleLinkedList extends SingleLinkedList
+class DoubleLinkedList extends SingleLinkedList implements LinkedListInterface
 {
 	/**
-	 * @var DoubleLinkedNode
+	 * @var DoubleNode
 	 */
 	protected $root = NULL;
 
 	/**
-	 * @var DoubleLinkedNode
+	 * @var DoubleNode
 	 */
 	protected $last = NULL;
 
@@ -32,11 +32,11 @@ class DoubleLinkedList extends SingleLinkedList
 	/**
 	 * @param mixed $value
 	 *
-*@return $this
+	 * @return $this
 	 */
 	public function insertFirst ($value)
 	{
-		$node = new Node($value);
+		$node = new DoubleNode($value);
 
 		$node->next = $this->root;
 		$this->root = $node;
@@ -52,11 +52,11 @@ class DoubleLinkedList extends SingleLinkedList
 	/**
 	 * @param mixed $value
 	 *
-*@return $this
+	 * @return $this
 	 */
 	public function insertLast ($value)
 	{
-		$node = new Node($value);
+		$node = new DoubleNode($value);
 
 		if (!$this->isEmpty())
 		{
