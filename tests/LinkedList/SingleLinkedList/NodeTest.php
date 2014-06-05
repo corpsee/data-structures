@@ -1,6 +1,6 @@
 <?php
 
-namespace DataStructures\Tests\LinkedList\SingleLinkedList;
+namespace DataStructuresTests\LinkedList\SingleLinkedList;
 
 use DataStructures\LinkedList\SingleLinkedList\Node as SingleNode;
 

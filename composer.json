@@ -14,8 +14,9 @@
 		"phpunit/phpunit": "3.7.x"
 	},
 	"autoload": {
-		"psr-0": {
-			"DataStructures": ""
+		"psr-4": {
+			"DataStructures\\":      "src",
+			"DataStructuresTests\\": "tests"
 		}
 	}
 }
